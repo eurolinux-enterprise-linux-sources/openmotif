@@ -1,7 +1,7 @@
 Summary: Open Motif runtime libraries and executables
 Name: openmotif
 Version: 2.3.3
-Release: 6.1%{?dist}
+Release: 7.1%{?dist}
 License: Open Group Public License
 Group: System Environment/Libraries
 Source: http://www.motifzone.net/files/public_downloads/openmotif/2.3/%{version}/openmotif-%{version}.tar.gz
@@ -30,6 +30,7 @@ Patch53: openmotif-2.3.3-motifzone_1552.patch
 Patch54: openmotif-2.3.3-motifzone_1559.patch
 Patch55: openmotif-2.3.3-motifzone_1529.patch
 Patch56: openmotif-2.3.3-motifzone_1536.patch
+Patch57: openmotif-2.3.1-rhbz_997241.patch
 
 Conflicts: lesstif <= 0.92.32-6
 
@@ -65,6 +66,7 @@ header files and also static libraries necessary to build Motif applications.
 %patch54 -p1 -b .motifzone_1559
 %patch55 -p1 -b .motifzone_1529
 %patch56 -p1 -b .motifzone_1536
+%patch57 -p1 -b .rhbz_997241
 
 %build
 aclocal -I .
@@ -126,8 +128,14 @@ rm -rf %{buildroot}
 %{_mandir}/man5/*
 
 %changelog
-* Mon Sep  9 2013 Thomas Woerner <twoerner@redhat.com> 2.3.3-6.1
-- fixed Performance issue: XmListSetPos() is very very slow (rhbz#1005742)
+* Mon May 12 2014 Thomas Woerner <twoerner@redhat.com> 2.3.3-7.1
+- added lost patch for #647411: openmotif-2.3.3-motifzone_1529.patch
+  (rhbz#1096754)
+- fixed missing outline in mwm while moving window (rhbz#1096749)
+  (copy of rhbz#997241)
+
+* Mon Sep  9 2013 Thomas Woerner <twoerner@redhat.com> 2.3.3-7
+- fixed Performance issue: XmListSetPos() is very very slow (rhbz#864409)
   (MotifZone bug #1536)
 
 * Mon Oct 15 2012 Thomas Woerner <twoerner@redhat.com> 2.3.3-6
