@@ -1,7 +1,7 @@
 Summary: Open Motif runtime libraries and executables
 Name: openmotif
 Version: 2.3.3
-Release: 7.1%{?dist}
+Release: 8%{?dist}
 License: Open Group Public License
 Group: System Environment/Libraries
 Source: http://www.motifzone.net/files/public_downloads/openmotif/2.3/%{version}/openmotif-%{version}.tar.gz
@@ -31,6 +31,8 @@ Patch54: openmotif-2.3.3-motifzone_1559.patch
 Patch55: openmotif-2.3.3-motifzone_1529.patch
 Patch56: openmotif-2.3.3-motifzone_1536.patch
 Patch57: openmotif-2.3.1-rhbz_997241.patch
+Patch58: openmotif-2.3.3-motifzone_1612.patch
+Patch59: openmotif-2.3.3-motifzone_1636.patch
 
 Conflicts: lesstif <= 0.92.32-6
 
@@ -67,6 +69,8 @@ header files and also static libraries necessary to build Motif applications.
 %patch55 -p1 -b .motifzone_1529
 %patch56 -p1 -b .motifzone_1536
 %patch57 -p1 -b .rhbz_997241
+%patch58 -p1 -b .motifzone_1612
+%patch59 -p1 -b .motifzone_1636
 
 %build
 aclocal -I .
@@ -128,10 +132,18 @@ rm -rf %{buildroot}
 %{_mandir}/man5/*
 
 %changelog
+* Fri Jun 13 2014 Thomas Woerner <twoerner@redhat.com> 2.3.3-8
+- fixed Label size computed wrong within a Form (rhbz#869782) (rhbz#953938)
+  (copy of rhbz#980577)
+  (MotifZone bug #1612 final upstream patch with white space changes)
+- fixed segmentation violation in XmList after calling XmListDeleteAllItems 
+  and clicking on a new item with left-shift left-button click (rhbz#1058644)
+  (MotifZone bug #1636)
+
 * Mon May 12 2014 Thomas Woerner <twoerner@redhat.com> 2.3.3-7.1
 - added lost patch for #647411: openmotif-2.3.3-motifzone_1529.patch
-  (rhbz#1096754)
-- fixed missing outline in mwm while moving window (rhbz#1096749)
+  (rhbz#1096315)
+- fixed missing outline in mwm while moving window (rhbz#1000343)
   (copy of rhbz#997241)
 
 * Mon Sep  9 2013 Thomas Woerner <twoerner@redhat.com> 2.3.3-7
