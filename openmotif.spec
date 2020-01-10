@@ -1,7 +1,7 @@
 Summary: Open Motif runtime libraries and executables
 Name: openmotif
 Version: 2.3.3
-Release: 5%{?dist}
+Release: 6.1%{?dist}
 License: Open Group Public License
 Group: System Environment/Libraries
 Source: http://www.motifzone.net/files/public_downloads/openmotif/2.3/%{version}/openmotif-%{version}.tar.gz
@@ -29,6 +29,7 @@ Patch52: openmotif-2.3.3-motifzone_1521.patch
 Patch53: openmotif-2.3.3-motifzone_1552.patch
 Patch54: openmotif-2.3.3-motifzone_1559.patch
 Patch55: openmotif-2.3.3-motifzone_1529.patch
+Patch56: openmotif-2.3.3-motifzone_1536.patch
 
 Conflicts: lesstif <= 0.92.32-6
 
@@ -63,6 +64,7 @@ header files and also static libraries necessary to build Motif applications.
 %patch53 -p1 -b .motifzone_1552
 %patch54 -p1 -b .motifzone_1559
 %patch55 -p1 -b .motifzone_1529
+%patch56 -p1 -b .motifzone_1536
 
 %build
 aclocal -I .
@@ -124,13 +126,18 @@ rm -rf %{buildroot}
 %{_mandir}/man5/*
 
 %changelog
-* Mon Oct 15 2012 Thomas Woerner <twoerner@redhat.com> 2.3.3-5
-- fixed use after free with comboboxes and XIM (rhbz#866499)
-  (MotifZone bug #1559)
-- fixed border at insertion cursor if XmNmarginWidth is set (rhbz#866496)
+* Mon Sep  9 2013 Thomas Woerner <twoerner@redhat.com> 2.3.3-6.1
+- fixed Performance issue: XmListSetPos() is very very slow (rhbz#1005742)
+  (MotifZone bug #1536)
+
+* Mon Oct 15 2012 Thomas Woerner <twoerner@redhat.com> 2.3.3-6
+- fixed copy/paste problem with Clipboard (rhbz#647411) (MotifZone bug #1529)
+
+* Fri Oct 12 2012 Thomas Woerner <twoerner@redhat.com> 2.3.3-5
+- fixed border at insertion cursor if XmNmarginWidth is set (rhbz#796014)
   (MotifZone bug #1552)
-- fixed copy/paste problem with Clipboard (rhbz#867463)
-  (MotifZone bug #1529)
+- fixed use after free with comboboxes and XIM (rhbz#836892)
+  (MotifZone bug #1559)
 
 * Mon Aug 15 2011 Thomas Woerner <twoerner@redhat.com> 2.3.3-4
 - fixed Label draws Xft text over border of its parent (rhbz#584300#c3)
