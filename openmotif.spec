@@ -1,7 +1,7 @@
 Summary: Open Motif runtime libraries and executables
 Name: openmotif
 Version: 2.3.3
-Release: 8%{?dist}
+Release: 9%{?dist}
 License: Open Group Public License
 Group: System Environment/Libraries
 Source: http://www.motifzone.net/files/public_downloads/openmotif/2.3/%{version}/openmotif-%{version}.tar.gz
@@ -10,7 +10,7 @@ URL: http://www.motifzone.net/
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 Requires: /usr/share/X11/XKeysymDB
 
-BuildRequires: automake, libtool, autoconf, flex
+BuildRequires: automake, libtool, autoconf, flex, flex-devel
 BuildRequires: byacc, pkgconfig
 BuildRequires: libjpeg-devel libpng-devel
 BuildRequires: libXft-devel libXmu-devel libXp-devel libXt-devel libXext-devel
@@ -33,6 +33,7 @@ Patch56: openmotif-2.3.3-motifzone_1536.patch
 Patch57: openmotif-2.3.1-rhbz_997241.patch
 Patch58: openmotif-2.3.3-motifzone_1612.patch
 Patch59: openmotif-2.3.3-motifzone_1636.patch
+Patch60: openmotif-2.3.3-motifzone_1473.patch
 
 Conflicts: lesstif <= 0.92.32-6
 
@@ -71,6 +72,7 @@ header files and also static libraries necessary to build Motif applications.
 %patch57 -p1 -b .rhbz_997241
 %patch58 -p1 -b .motifzone_1612
 %patch59 -p1 -b .motifzone_1636
+%patch60 -p1 -b .motifzone_1473
 
 %build
 aclocal -I .
@@ -132,6 +134,10 @@ rm -rf %{buildroot}
 %{_mandir}/man5/*
 
 %changelog
+* Mon Oct 31 2016 Thomas Woerner <twoerner@redhat.com> 2.3.3-9
+- Added XmComboBox patch to properly set child args (rhbz#1208829)
+  (MotifZone bug #1473)
+
 * Fri Jun 13 2014 Thomas Woerner <twoerner@redhat.com> 2.3.3-8
 - fixed Label size computed wrong within a Form (rhbz#869782) (rhbz#953938)
   (copy of rhbz#980577)
